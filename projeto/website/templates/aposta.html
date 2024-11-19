@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Aposta{% endblock %}
+{% block nome %}Apostar em evento{% endblock %}
 
 {% block conteudo %}
-<h1>Apostar em evento</h1>
+<form method="POST"></form>
+    <p>Insira a sua resposta:</p>
+    
+    <input type="radio" id="acontecera" name="resposta" value="acontecera" required>
+    <label for="acontecera">Acontecerá</label>
+    
+    <input type="radio" id="nao_acontecera" name="resposta" value="nao_acontecera">
+    <label for="nao_acontecera">Não acontecerá</label>
+    
+    <br><br>
+    
+    <label for="valor">Valor da aposta:</label>
+    <input type="number" id="valor" name="valor" min="0" step="0.01" required>
+    
+    <br><br>
+    
+    <button type="submit">Apostar</button>
+</form>
 {% endblock %}

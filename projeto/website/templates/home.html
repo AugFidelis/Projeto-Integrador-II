@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Home{% endblock %}
+{% block nome %}Home{% endblock %}
 
 {% block conteudo %}
-<h1>Home</h1>
 <div>
     <a href="{{ url_for('home.criar_evento') }}">Criar evento</a>
     <a href="{{ url_for('home.apostar') }}">Apostar</a>

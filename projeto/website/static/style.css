@@ -8,3 +8,8 @@ body{
 .navbar a{
     color: white;
 }
+
+.nome{
+    color: white;
+    text-align: center;
+}

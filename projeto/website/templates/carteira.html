@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Carteira{% endblock %}
+{% block nome %}Carteira{% endblock %}
+
 
 {% block conteudo %}
-<h1>Carteira</h1>
+<h3>Saldo:</h3>
 <a href="{{ url_for('carteira.compra') }}">Adicionar créditos</a>
 {% endblock %}
