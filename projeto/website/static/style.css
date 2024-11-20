@@ -13,3 +13,29 @@ body{
     color: white;
     text-align: center;
 }
+
+.historico-creditos-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.historico-creditos-container thead {
+    position: sticky;
+    top: 0;
+    background-color: #8a3ea6;
+    z-index: 1;
+}
+
+.historico-creditos-container table {
+    width: 100%;
+}
+
+.historico-creditos-container th,
+.historico-creditos-container td {
+    text-align: center;
+}

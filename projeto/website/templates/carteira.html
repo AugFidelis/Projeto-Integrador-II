@@ -3,8 +3,32 @@
 {% block titulo %}Carteira{% endblock %}
 {% block nome %}Carteira{% endblock %}
 
-
 {% block conteudo %}
 <h3>Saldo: {{ "%.2f"|format(saldo) }}</h3>
-<a href="{{ url_for('carteira.compra') }}">Adicionar créditos</a>
+<div class="acoes">
+    <a href="{{ url_for('carteira.compra') }}">Adicionar créditos</a>
+    <a href="{{ url_for('carteira.sacar_saldo') }}">Sacar saldo</a>
+</div>
+
+<h3>Histórico de Compra de Créditos</h3>
+<div class="historico-creditos-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Valor</th>
+                <th>Meio de Pagamento</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transacao in transacoes %}
+            <tr>
+                <td>R$ {{ "%.2f"|format(transacao[0]) }}</td>
+                <td>{{ transacao[1] }}</td>
+                <td>{{ transacao[2].strftime('%d/%m/%Y %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

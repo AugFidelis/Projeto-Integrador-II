@@ -4,7 +4,10 @@ home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-    return render_template('index.html')
+    if(session.get('logado')):
+        return redirect(url_for('home.pagina_home'))
+    else:
+        return render_template('index.html')
 
 @home.route('/home')
 def pagina_home():
