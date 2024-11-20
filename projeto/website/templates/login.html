@@ -3,23 +3,22 @@
 {% block titulo %}Login{% endblock %}
 {% block nome %}Login{% endblock %}
 
-
 {% block conteudo %}
-<div class="container">
+<div>
     <form method="POST">
-        <div class="form-group">
+        <div>
             <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
+            <input type="email" id="email" name="email" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" class="form-control" required>
+            <input type="password" id="senha" name="senha" required>
         </div>
 
-        <div class="botoes">
-            <button type="submit" class="btn-login">Fazer Login</button>
-            <a href="{{ url_for('auth.cadastro') }}" class="btn-cadastro">Criar conta</a>
+        <div>
+            <button type="submit" value="login">Fazer Login</button>
+            <a href="{{ url_for('auth.cadastro') }}">Criar conta</a>
         </div>
     </form>
 </div>
