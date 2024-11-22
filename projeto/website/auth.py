@@ -63,7 +63,28 @@ def cadastro():
             # adicionar usuario pro banco de dados
             cursor.execute("INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES (%s, %s, %s, %s)", (email, senha1, nome, data_nascimento))
             connection.commit()
-            flash('Usuário registrado com sucesso!', category='sucesso')
-            return redirect(url_for('auth.login'))
+            
+            # Fazer login automático
+            session['logado'] = True
+            session['email'] = email
+            session['nome'] = nome
+            session['data_nascimento'] = data_nascimento
+            session['saldo'] = 0.0  # Saldo inicial
+            
+            # flash('Usuário registrado com sucesso!', category='sucesso')
+            return redirect(url_for('auth.credito_inicial'))
 
     return render_template('cadastro.html')
+
+@auth.route('/credito-inicial', methods=['GET', 'POST'])
+def credito_inicial():
+    if not session.get('logado'):
+        return redirect(url_for('auth.login'))
+    
+    if request.method == 'POST':
+        if request.form.get('deposito_inicial') == 'sim':
+            return redirect(url_for('carteira.compra'))
+        else:
+            return redirect(url_for('home.pagina_home'))
+
+    return render_template('credito_inicial.html')

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Crédito inicial{% endblock %}
+{% block nome %}Crédito inicial{% endblock %}
+
+{% block conteudo %}
+<div>
+    <form method="POST" action="{{ url_for('auth.credito_inicial') }}">
+        <label>Deseja fazer um depósito inicial?</label>
+        
+        <div>
+            <input type="radio" id="nao" name="deposito_inicial" value="nao">
+            <label for="nao">Não</label>
+
+            <input type="radio" id="sim" name="deposito_inicial" value="sim">
+            <label for="sim">Sim</label>
+        </div>
+
+        <button type="submit">Confirmar</button>
+    </form>
+</div>
+{% endblock %}

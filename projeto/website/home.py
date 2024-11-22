@@ -16,10 +16,3 @@ def pagina_home():
     else:
         return redirect(url_for('home.index'))
 
-@home.route('/criar_evento')
-def criar_evento():
-    return render_template('criar_evento.html')
-
-@home.route('/apostar')
-def apostar():
-    return render_template('aposta.html')

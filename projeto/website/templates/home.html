@@ -9,7 +9,7 @@
         <h2>Bem-vindo, {{ nome }}!</h2>
         <a href="{{ url_for('auth.logout') }}">Sair</a>
     </div>
-    <a href="{{ url_for('home.criar_evento') }}">Criar evento</a>
-    <a href="{{ url_for('home.apostar') }}">Apostar</a>
+    <a href="{{ url_for('eventos.criar_evento') }}">Criar evento</a>
+    <a href="{{ url_for('eventos.apostar') }}">Apostar</a>
 </div>
 {% endblock %}
