@@ -15,4 +15,11 @@ def pagina_home():
         return render_template('home.html', nome=session.get('nome'))
     else:
         return redirect(url_for('home.index'))
+    
+@home.route('/moderador')
+def pagina_moderador():
+    if(session.get('email') != 'moderador@4bets.com'):
+        return redirect(url_for('home.pagina_home'))
+    else:
+        return render_template('moderador.html')
 
