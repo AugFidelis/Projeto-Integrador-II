@@ -4,4 +4,24 @@
 {% block nome %}Controle de eventos{% endblock %}
 
 {% block conteudo %}
+<div class="eventos-pendentes">
+    <h2>Eventos Pendentes</h2>
+    {% if eventos %}
+        {% for evento in eventos %}
+        <div class="evento-card">
+            <h3>{{ evento[1] }}</h3>
+            <p>{{ evento[2] }}</p>
+            <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
+            <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p>
+            <form method="POST">
+                <input type="hidden" name="evento_id" value="{{ evento[0] }}">
+                <button type="submit" name="acao" value="aprovar">Aprovar</button>
+                <button type="submit" name="acao" value="rejeitar">Rejeitar</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Não há eventos pendentes para moderação.</p>
+    {% endif %}
+</div>
 {% endblock %}

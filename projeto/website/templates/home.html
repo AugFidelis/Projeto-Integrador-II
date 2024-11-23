@@ -10,6 +10,22 @@
         <a href="{{ url_for('auth.logout') }}">Sair</a>
     </div>
     <a href="{{ url_for('eventos.criar_evento') }}">Criar evento</a>
-    <a href="{{ url_for('eventos.apostar') }}">Apostar</a>
+    
+    <div class="eventos-aprovados">
+        <h2>Eventos Disponíveis</h2>
+        {% if eventos %}
+            {% for evento in eventos %}
+            <div>
+                <h3>{{ evento[1] }}</h3> <!--titulo-->
+                <p>{{ evento[2] }}</p> <!--descricao-->
+                <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p> <!--data_evento-->
+                <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p> <!--valor_cota-->
+                <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a> <!--[0] é o id_evento-->
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Não há eventos disponíveis no momento.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
