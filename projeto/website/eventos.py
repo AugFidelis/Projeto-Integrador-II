@@ -45,7 +45,7 @@ def criar_evento():
     
     return render_template('criar_evento.html')
 
-@eventos.route('/apostar/<int:evento_id>', methods=['GET', 'POST']) #<int:evento_id> é o id do evento que aparece na url
+@eventos.route('/apostar/<int:evento_id>', methods=['GET', 'POST'])
 def apostar(evento_id):
     if not session.get('logado'):
         return redirect(url_for('auth.login'))
@@ -58,14 +58,34 @@ def apostar(evento_id):
     """, (evento_id,))
     evento = cursor.fetchone()
     
+    # Verificar se o período de apostas já terminou
+    data_fim = evento[5]
+    if datetime.now() > data_fim:
+        flash('O período de apostas para este evento já terminou!', category='erro')
+        return redirect(url_for('home.pagina_home'))
+    
     if request.method == 'POST':
         resultado = 'Sim' if request.form.get('resultado') == 'Acontecerá' else 'Não'
         valor_aposta = float(request.form.get('valor_aposta'))
         
-        # Obter o ID do usuário atual
+        # Obter o ID e saldo do usuário atual
         email = session.get('email')
-        cursor.execute("SELECT idusuario FROM usuario WHERE email = %s", (email,))
-        id_usuario = cursor.fetchone()[0]
+        cursor.execute("SELECT idusuario, saldo FROM usuario WHERE email = %s", (email,))
+        usuario = cursor.fetchone()
+        id_usuario = usuario[0]
+        saldo_atual = usuario[1]
+        
+        # Verificar se o usuário tem saldo suficiente
+        if saldo_atual < valor_aposta:
+            flash('Saldo insuficiente para realizar a aposta!', category='erro')
+            return redirect(url_for('eventos.apostar', evento_id=evento_id))
+        
+        # Converter saldo_atual para float antes da operação
+        novo_saldo = float(saldo_atual) - valor_aposta
+        
+        # Atualizar o saldo do usuário
+        cursor.execute("UPDATE usuario SET saldo = %s WHERE idusuario = %s", 
+                      (novo_saldo, id_usuario))
         
         # Inserir a aposta no banco de dados
         cursor.execute("""

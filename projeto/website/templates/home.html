@@ -5,27 +5,56 @@
 
 {% block conteudo %}
 <div>
-    <div>
+    <div class="header">
         <h2>Bem-vindo, {{ nome }}!</h2>
-        <a href="{{ url_for('auth.logout') }}">Sair</a>
+        <div class="header-actions">
+            <a href="{{ url_for('eventos.criar_evento') }}" class="btn-criar">Criar evento</a>
+            <a href="{{ url_for('auth.logout') }}" class="btn-sair">Sair</a>
+        </div>
     </div>
-    <a href="{{ url_for('eventos.criar_evento') }}">Criar evento</a>
     
-    <div class="eventos-aprovados">
-        <h2>Eventos Disponíveis</h2>
-        {% if eventos %}
-            {% for evento in eventos %}
-            <div>
-                <h3>{{ evento[1] }}</h3> <!--titulo-->
-                <p>{{ evento[2] }}</p> <!--descricao-->
-                <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p> <!--data_evento-->
-                <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p> <!--valor_cota-->
-                <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a> <!--[0] é o id_evento-->
+    <div class="eventos-container">
+        <div class="eventos-proximos-fim">
+            <h2>Eventos Próximos do Fim</h2>
+            <p class="debug-info">Total de eventos próximos: {{ eventos_proximos_fim|length }}</p>
+            <div class="eventos-lista">
+                {% if eventos_proximos_fim %}
+                    {% for evento in eventos_proximos_fim %}
+                    <div class="evento-card">
+                        <h3>{{ evento[1] }}</h3>
+                        <p>{{ evento[2] }}</p>
+                        <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
+                        <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                        <p>Fim das apostas: {{ evento[6].strftime('%d/%m/%Y %H:%M') }}</p>
+                        <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Não há eventos próximos do fim.</p>
+                {% endif %}
             </div>
-            {% endfor %}
-        {% else %}
-            <p>Não há eventos disponíveis no momento.</p>
-        {% endif %}
+        </div>
+
+        <div class="eventos-populares">
+            <h2>Eventos Mais Apostados</h2>
+
+            <div class="eventos-lista">
+                {% if eventos_populares %}
+                    {% for evento in eventos_populares %}
+                    <div class="evento-card">
+                        <h3>{{ evento[1] }}</h3>
+                        <p>{{ evento[2] }}</p>
+                        <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
+                        <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                        <p>Total de apostas: {{ evento[7] }}</p>
+                        <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Não há eventos populares no momento.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -17,7 +17,12 @@ carteira = Blueprint('carteira', __name__)
 def paginacarteira():
     email = session.get('email')
     
-    # Modificada para mostrar apenas transações com valor positivo
+    # Atualizar saldo da sessão com o valor atual do banco de dados
+    cursor.execute("SELECT saldo FROM usuario WHERE email = %s", (email,))
+    saldo_atual = float(cursor.fetchone()[0])
+    session['saldo'] = saldo_atual
+    
+    # Buscar transações
     cursor.execute("""
         SELECT t.valor_transacao, t.meio_pagamento, t.data_transacao 
         FROM transacoes t
@@ -27,16 +32,34 @@ def paginacarteira():
     """, (email,))
     
     transacoes = cursor.fetchall()
-    return render_template('carteira.html', saldo=session.get('saldo'), transacoes=transacoes)
+
+    # Buscar histórico de apostas
+    cursor.execute("""
+        SELECT a.valor_aposta, e.titulo, a.resultado_esperado, a.data_aposta
+        FROM apostas a
+        JOIN usuario u ON a.id_usuario = u.idusuario
+        JOIN eventos e ON a.id_evento = e.id_evento
+        WHERE u.email = %s
+        ORDER BY a.data_aposta DESC
+    """, (email,))
+    
+    apostas = cursor.fetchall()
+    
+    # Forçar commit para garantir dados atualizados
+    connection.commit()
+    
+    return render_template('carteira.html', saldo=session.get('saldo'), 
+                         transacoes=transacoes, apostas=apostas)
 
 @carteira.route('/compra', methods=['GET', 'POST'])
 def compra():
     if request.method == 'POST':
+        # Convert session saldo to float before adding
         valor = float(request.form.get('valor'))
+        novo_saldo = float(session.get('saldo', 0)) + valor
         
         # Atualizar saldo do usuário
         email = session.get('email')
-        novo_saldo = session.get('saldo') + valor
         cursor.execute("UPDATE usuario SET saldo = %s WHERE email = %s", (novo_saldo, email))
         
         # Registrar transação

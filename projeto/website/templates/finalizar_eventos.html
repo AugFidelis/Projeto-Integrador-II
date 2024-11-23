@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Finalizar Eventos{% endblock %}
+{% block nome %}Finalizar Eventos{% endblock %}
+
+{% block conteudo %}
+<div class="eventos-container">
+    <div class="eventos-lista">
+        {% if eventos %}
+            {% for evento in eventos %}
+            <div class="evento-card">
+                <h3>{{ evento[1] }}</h3>
+                <p>{{ evento[2] }}</p>
+                <p>Data do evento: {{ evento[3].strftime('%d/%m/%Y') }}</p>
+                
+                <button onclick="confirmarFinalizacao('{{ evento[0] }}')" class="btn-finalizar">
+                    Finalizar Evento
+                </button>
+                
+                <div id="opcoes-{{ evento[0] }}" style="display: none;" class="opcoes-resultado">
+                    <form method="POST" class="form-finalizar">
+                        <input type="hidden" name="evento_id" value="{{ evento[0] }}">
+                        <div class="opcoes-botoes">
+                            <button type="submit" name="resultado" value="Sim" class="btn-sim">
+                                Sim (Aconteceu)
+                            </button>
+                            <button type="submit" name="resultado" value="Não" class="btn-nao">
+                                Não (Não Aconteceu)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Não há eventos para finalizar no momento.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function confirmarFinalizacao(eventoId) {
+    // Esconde todas as opções primeiro
+    document.querySelectorAll('.opcoes-resultado').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Mostra as opções para o evento selecionado
+    const opcoesDiv = document.getElementById(`opcoes-${eventoId}`);
+    opcoesDiv.style.display = 'block';
+}
+</script>
+{% endblock %}

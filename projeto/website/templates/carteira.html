@@ -31,4 +31,28 @@
         </tbody>
     </table>
 </div>
+
+<h3>Histórico de Apostas</h3>
+<div class="tabela-apostas">
+    <table>
+        <thead>
+            <tr>
+                <th>Valor da Aposta</th>
+                <th>Evento</th>
+                <th>Resultado Esperado</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aposta in apostas %}
+            <tr>
+                <td>R$ {{ "%.2f"|format(aposta[0]) }}</td>
+                <td>{{ aposta[1] }}</td>
+                <td>{{ aposta[2] }}</td>
+                <td>{{ aposta[3].strftime('%d/%m/%Y %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

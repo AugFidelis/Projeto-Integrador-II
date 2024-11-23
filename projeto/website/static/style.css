@@ -39,3 +39,152 @@ body{
 .historico-creditos-container td {
     text-align: center;
 }
+
+/* ------------------------------------------ */
+
+.tabela-apostas {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.tabela-apostas thead {
+    position: sticky;
+    top: 0;
+    background-color: #8a3ea6;
+    z-index: 1;
+}
+
+.tabela-apostas table {
+    width: 100%;
+}
+
+.tabela-apostas th,
+.tabela-apostas td {
+    text-align: center;
+}
+
+.eventos-container {
+    margin: 20px 0;
+}
+
+.eventos-proximos-fim,
+.eventos-populares {
+    margin-bottom: 30px;
+}
+
+.eventos-lista {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.eventos-lista::-webkit-scrollbar {
+    width: 8px;
+}
+
+.eventos-lista::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.eventos-lista::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.eventos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.evento-card {
+    flex: 0 0 300px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.evento-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.evento-card p {
+    margin: 5px 0;
+}
+
+.evento-card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #8a3ea6;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.evento-card a:hover {
+    background-color: #6c2e84;
+}
+
+/* ------------------------------------------ */
+
+.btn-finalizar {
+    background-color: #8a3ea6;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-finalizar:hover {
+    background-color: #6c2e84;
+}
+
+.opcoes-resultado {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.opcoes-botoes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-sim, .btn-nao {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-sim {
+    background-color: #4CAF50;
+}
+
+.btn-nao {
+    background-color: #f44336;
+}
+
+.btn-sim:hover {
+    background-color: #45a049;
+}
+
+.btn-nao:hover {
+    background-color: #da190b;
+}
