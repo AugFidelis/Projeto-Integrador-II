@@ -7,7 +7,7 @@
 <form method="POST">
     <h3>{{ evento[0] }}</h3>
     <p>{{ evento[1] }}</p>
-    <p>Valor mínimo da cota: R$ {{ evento[2] }}</p>
+    <p>Valor da cota: {{ "%.2f"|format(evento[2]) }}x</p>
     
     <div>
         <input type="radio" name="resultado" value="Acontecerá" id="acontecera" required>

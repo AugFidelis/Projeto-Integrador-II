@@ -16,7 +16,6 @@
     <div class="eventos-container">
         <div class="eventos-proximos-fim">
             <h2>Eventos Próximos do Fim</h2>
-            <p class="debug-info">Total de eventos próximos: {{ eventos_proximos_fim|length }}</p>
             <div class="eventos-lista">
                 {% if eventos_proximos_fim %}
                     {% for evento in eventos_proximos_fim %}
@@ -24,7 +23,7 @@
                         <h3>{{ evento[1] }}</h3>
                         <p>{{ evento[2] }}</p>
                         <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
-                        <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                        <p>Valor da cota: {{ "%.2f"|format(evento[3]) }}x</p>
                         <p>Fim das apostas: {{ evento[6].strftime('%d/%m/%Y %H:%M') }}</p>
                         <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a>
                     </div>
@@ -37,7 +36,6 @@
 
         <div class="eventos-populares">
             <h2>Eventos Mais Apostados</h2>
-
             <div class="eventos-lista">
                 {% if eventos_populares %}
                     {% for evento in eventos_populares %}
@@ -45,7 +43,7 @@
                         <h3>{{ evento[1] }}</h3>
                         <p>{{ evento[2] }}</p>
                         <p>Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
-                        <p>Valor mínimo: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                        <p>Valor da cota: {{ "%.2f"|format(evento[3]) }}x</p>
                         <p>Total de apostas: {{ evento[7] }}</p>
                         <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}">Apostar</a>
                     </div>

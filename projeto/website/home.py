@@ -106,6 +106,14 @@ def finalizar_eventos():
         evento_id = request.form.get('evento_id')
         resultado = request.form.get('resultado')
         
+        # Buscar a cota do evento
+        cursor.execute("""
+            SELECT valor_cota 
+            FROM eventos 
+            WHERE id_evento = %s
+        """, (evento_id,))
+        valor_cota = float(cursor.fetchone()[0])
+        
         # Atualizar o resultado do evento
         cursor.execute("""
             UPDATE eventos 
@@ -121,23 +129,36 @@ def finalizar_eventos():
         """, (evento_id,))
         apostas = cursor.fetchall()
         
-        # Calcular total apostado
-        total_apostado = sum(aposta[1] for aposta in apostas)
-        total_vencedores = sum(aposta[1] for aposta in apostas if aposta[2] == resultado)
+        # Calcular o total perdido e o total apostado pelos vencedores
+        total_perdido = sum(float(aposta[1]) for aposta in apostas if aposta[2] != resultado)
+        total_apostado_vencedores = sum(float(aposta[1]) for aposta in apostas if aposta[2] == resultado)
         
         # Distribuir os ganhos para os vencedores
         for aposta in apostas:
             if aposta[2] == resultado:  # Se acertou o resultado
-                # Calcula o ganho proporcional
-                proporcao = aposta[1] / total_vencedores
-                ganho = total_apostado * proporcao
+                valor_apostado = float(aposta[1])  # Converter para float
+                
+                # Ganho da cota
+                ganho_cota = valor_apostado * (valor_cota - 1)  # Subtrair 1 da cota pois o valor apostado já será devolvido
+                
+                # Ganho proporcional dos perdedores
+                if total_apostado_vencedores > 0:
+                    proporcao = valor_apostado / total_apostado_vencedores
+                    ganho_perdedores = total_perdido * proporcao
+                else:
+                    ganho_perdedores = 0
+                
+                # Ganho total (incluindo a devolução do valor apostado)
+                ganho_total = ganho_cota + ganho_perdedores + valor_apostado
+                
+                print(f"Debug - Usuário {aposta[0]}: Valor apostado: {valor_apostado}, Ganho cota: {ganho_cota}, Ganho perdedores: {ganho_perdedores}, Total: {ganho_total}")  # Debug
                 
                 # Atualiza o saldo do usuário
                 cursor.execute("""
                     UPDATE usuario 
                     SET saldo = saldo + %s 
                     WHERE idusuario = %s
-                """, (ganho, aposta[0]))
+                """, (ganho_total, aposta[0]))
         
         connection.commit()
         flash('Evento finalizado e ganhos distribuídos com sucesso!', category='sucesso')

@@ -21,7 +21,7 @@ def criar_evento():
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         descricao = request.form.get('descricao')
-        valor_minimo = float(request.form.get('valor_minimo'))
+        valor_cota = float(request.form.get('valor_cota'))
         data_evento = request.form.get('data_evento')
         data_inicio = request.form.get('data_inicio')
         data_fim = request.form.get('data_fim')
@@ -36,7 +36,7 @@ def criar_evento():
             INSERT INTO eventos (titulo, descricao, valor_cota, data_evento, 
             data_inicio_apostas, data_fim_apostas, id_usuario_criador)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """, (titulo, descricao, valor_minimo, data_evento, data_inicio, 
+        """, (titulo, descricao, valor_cota, data_evento, data_inicio, 
               data_fim, id_usuario))
         
         connection.commit()
@@ -73,15 +73,15 @@ def apostar(evento_id):
         cursor.execute("SELECT idusuario, saldo FROM usuario WHERE email = %s", (email,))
         usuario = cursor.fetchone()
         id_usuario = usuario[0]
-        saldo_atual = usuario[1]
+        saldo_atual = float(usuario[1])
         
         # Verificar se o usuário tem saldo suficiente
         if saldo_atual < valor_aposta:
             flash('Saldo insuficiente para realizar a aposta!', category='erro')
             return redirect(url_for('eventos.apostar', evento_id=evento_id))
         
-        # Converter saldo_atual para float antes da operação
-        novo_saldo = float(saldo_atual) - valor_aposta
+        # Não é mais necessário converter saldo_atual para float aqui, pois já foi convertido
+        novo_saldo = saldo_atual - valor_aposta
         
         # Atualizar o saldo do usuário
         cursor.execute("UPDATE usuario SET saldo = %s WHERE idusuario = %s", 
