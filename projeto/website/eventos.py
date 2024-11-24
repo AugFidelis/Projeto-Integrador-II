@@ -99,3 +99,25 @@ def apostar(evento_id):
         return redirect(url_for('home.pagina_home'))
     
     return render_template('aposta.html', evento=evento)
+
+@eventos.route('/pesquisar_eventos', methods=['GET', 'POST'])
+def pesquisar_eventos():
+    eventos = []
+    if request.method == 'POST':
+        termo_pesquisa = request.form.get('termo_pesquisa')
+        
+        # Buscar eventos que correspondam ao termo de pesquisa
+        cursor.execute("""
+            SELECT id_evento, titulo, descricao, valor_cota, data_evento, 
+            data_inicio_apostas, data_fim_apostas 
+            FROM eventos 
+            WHERE titulo LIKE %s OR descricao LIKE %s
+            ORDER BY data_evento DESC
+        """, (f'%{termo_pesquisa}%', f'%{termo_pesquisa}%'))
+        
+        eventos = cursor.fetchall()
+        
+        if not eventos:
+            flash('Nenhum evento encontrado com esse termo.', category='info')
+    
+    return render_template('pesquisar_eventos.html', eventos=eventos)

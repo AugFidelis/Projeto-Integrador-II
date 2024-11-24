@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo %}Pesquisar Eventos{% endblock %}
+{% block nome %}Pesquisar Eventos{% endblock %}
+
+{% block conteudo %}
+<div class="pesquisa-container">
+    <h1>Pesquisar Eventos</h1>
+    
+    <form class="pesquisa-form" method="POST">
+        <div class="form-grupo">
+            <input type="text" 
+                   name="termo_pesquisa" 
+                   placeholder="Digite o termo de pesquisa..."
+                   required>
+        </div>
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    {% if eventos %}
+    <div class="resultados">
+        <h2>Resultados da pesquisa:</h2>
+        <div class="eventos-grid">
+            {% for evento in eventos %}
+            <div class="evento-card">
+                <h3>{{ evento[1] }}</h3>
+                <p class="descricao">{{ evento[2] }}</p>
+                <p class="data">Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
+                <p class="valor">Valor da cota: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}" 
+                   class="btn-apostar">Apostar</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
