@@ -105,12 +105,12 @@ def pesquisar_eventos():
     if request.method == 'POST':
         termo_pesquisa = request.form.get('termo_pesquisa')
         
-        # Buscar eventos que correspondam ao termo de pesquisa
         cursor.execute("""
             SELECT id_evento, titulo, descricao, valor_cota, data_evento, 
             data_inicio_apostas, data_fim_apostas 
             FROM eventos 
-            WHERE titulo LIKE %s OR descricao LIKE %s
+            WHERE (titulo LIKE %s OR descricao LIKE %s)
+            AND status = 'Aprovado'
             ORDER BY data_evento DESC
         """, (f'%{termo_pesquisa}%', f'%{termo_pesquisa}%'))
         
