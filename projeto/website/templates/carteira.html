@@ -5,9 +5,9 @@
 
 {% block conteudo %}
 <h3>Saldo: {{ "%.2f"|format(saldo) }}</h3>
-<div class="acoes">
-    <a href="{{ url_for('carteira.compra') }}">Adicionar créditos</a>
-    <a href="{{ url_for('carteira.sacar_saldo') }}">Sacar saldo</a>
+<div class="carteira-actions">
+    <a href="{{ url_for('carteira.compra') }}" class="btn-action">Adicionar créditos</a>
+    <a href="{{ url_for('carteira.sacar_saldo') }}" class="btn-action">Sacar saldo</a>
 </div>
 
 <h3>Histórico de Compra de Créditos</h3>

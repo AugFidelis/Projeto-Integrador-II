@@ -4,8 +4,6 @@
 
 {% block conteudo %}
 <div class="pesquisa-container">
-    <h1>Pesquisar Eventos</h1>
-    
     <form class="pesquisa-form" method="POST">
         <div class="form-grupo">
             <input type="text" 
@@ -25,7 +23,7 @@
                 <h3>{{ evento[1] }}</h3>
                 <p class="descricao">{{ evento[2] }}</p>
                 <p class="data">Data do evento: {{ evento[4].strftime('%d/%m/%Y') }}</p>
-                <p class="valor">Valor da cota: R$ {{ "%.2f"|format(evento[3]) }}</p>
+                <p class="valor">Valor da cota: {{ "%.2f"|format(evento[3]) }}x</p>
                 <a href="{{ url_for('eventos.apostar', evento_id=evento[0]) }}" 
                    class="btn-apostar">Apostar</a>
             </div>

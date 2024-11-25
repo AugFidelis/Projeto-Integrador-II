@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto&display=swap');
 
-body{
+body {
     background-color: #8a3ea6;
     font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar a{
@@ -15,13 +17,19 @@ body{
 }
 
 .historico-creditos-container {
-    max-height: 150px;
+    max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 2px solid #ffffff;
     border-radius: 4px;
-    padding: 10px;
     margin: 10px 0;
     position: relative;
+    background-color: #6c2e84;
+    color: white;
+}
+
+.historico-creditos-container table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .historico-creditos-container thead {
@@ -31,8 +39,9 @@ body{
     z-index: 1;
 }
 
-.historico-creditos-container table {
-    width: 100%;
+.historico-creditos-container th {
+    padding: 12px;
+    font-weight: bold;
 }
 
 .historico-creditos-container th,
@@ -43,13 +52,19 @@ body{
 /* ------------------------------------------ */
 
 .tabela-apostas {
-    max-height: 150px;
+    max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 2px solid #ffffff;
     border-radius: 4px;
-    padding: 10px;
     margin: 10px 0;
     position: relative;
+    background-color: #6c2e84;
+    color: white;
+}
+
+.tabela-apostas table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .tabela-apostas thead {
@@ -59,13 +74,19 @@ body{
     z-index: 1;
 }
 
-.tabela-apostas table {
-    width: 100%;
+.tabela-apostas th {
+    padding: 12px;
+    font-weight: bold;
 }
 
 .tabela-apostas th,
 .tabela-apostas td {
     text-align: center;
+}
+
+.tabela-apostas td,
+.historico-creditos-container td {
+    padding: 10px;
 }
 
 .eventos-container {
@@ -80,10 +101,11 @@ body{
 .eventos-lista {
     max-height: 400px;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    border: 2px solid #ffffff;
     border-radius: 4px;
     padding: 15px;
     margin: 10px 0;
+    background-color: #6c2e84;
 }
 
 .eventos-lista::-webkit-scrollbar {
@@ -207,7 +229,7 @@ body{
 /* Formulário de pesquisa */
 .pesquisa-form {
     max-width: 600px;
-    margin: 0 auto 40px;
+    margin: 0 0 40px;
 }
 
 .form-grupo {
@@ -223,22 +245,23 @@ body{
 }
 
 .pesquisa-form button {
-    background-color: #007bff;
-    color: white;
     padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .pesquisa-form button:hover {
-    background-color: #0056b3;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Resultados da pesquisa */
 .resultados h2 {
-    color: #333;
+    color: #000000;
     margin-bottom: 20px;
 }
 
@@ -302,6 +325,256 @@ body{
     .pesquisa-container {
         padding: 10px;
     }
+}
+
+/* Header and Navigation Styles */
+.site-header {
+    background-color: #333333;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-logo {
+    height: 50px;
+    width: auto;
+}
+
+.site-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: #8a3ea6;
+}
+
+.nav-link.active {
+    background-color: #8a3ea6;
+}
+
+.main-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.eventos-pendentes {
+    margin: 20px 0;
+}
+
+.eventos-pendentes .eventos-lista {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #6c2e84;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.eventos-pendentes .evento-card {
+    flex: 0 0 300px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.eventos-pendentes .evento-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.eventos-pendentes .evento-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.eventos-pendentes .opcoes-botoes {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.btn-aprovar, .btn-rejeitar {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.btn-aprovar {
+    background-color: #4CAF50;
+}
+
+.btn-rejeitar {
+    background-color: #f44336;
+}
+
+.btn-aprovar:hover {
+    background-color: #45a049;
+}
+
+.btn-rejeitar:hover {
+    background-color: #da190b;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-action {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-action:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn-sair {
+    background-color: rgba(244, 67, 54, 0.6);
+}
+
+.btn-sair:hover {
+    background-color: rgba(244, 67, 54, 0.8);
+}
+
+.carteira-actions {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0 30px 0;
+}
+
+.carteira-actions .btn-action {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.carteira-actions .btn-action:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 600px;
+    background-color: #6c2e84;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+    margin: 20px auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="datetime-local"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #e0e0e0;
+    font-size: 0.9em;
+}
+
+.form-group .radio-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.form-group .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-submit {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-submit:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 

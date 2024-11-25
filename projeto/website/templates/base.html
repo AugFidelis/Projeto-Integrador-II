@@ -7,35 +7,33 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="navbar">
-        {% if session.get('logado') %}
-            <a href="{{ url_for('home.pagina_home') }}">Home</a>
-            <a href="{{ url_for('carteira.paginacarteira') }}">Carteira</a>
-        {% endif %}
-        {% if session.get('email') == 'moderador@4bets.com' %}
-            <a href="{{ url_for('home.pagina_moderador') }}">Controle de eventos</a>
-            <a href="{{ url_for('home.finalizar_eventos') }}">Finalizar eventos</a>
-        {% endif %}
-    </div>
-    <h1 class="nome">{% block nome %}{% endblock %}</h1>
-    <hr>
-    {%  with mensagens = get_flashed_messages(with_categories=true)  %}
-    {%  if mensagens  %}
-        {%  for categoria, mensagem in mensagens  %}
-            {%  if categoria == 'erro'  %}
-                <div style="color: red;">
-                    {{  mensagem  }}
-                </div>
-            {%  else  %}
-                <div style="color: green;">
-                    {{  mensagem  }}
-                </div>
-            {%  endif  %}
-        {%  endfor  %}
-    {%  endif  %}
-    {%  endwith  %}
-
-    {% block conteudo %}{% endblock %}
+    <header class="site-header">
+        <img src="{{ url_for('static', filename='logo_site.png') }}" alt="4-Bets Logo" class="site-logo">
+        <nav class="site-nav">
+            {% if session.get('logado') %}
+                <a href="{{ url_for('home.pagina_home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('carteira.paginacarteira') }}" class="nav-link">Carteira</a>
+            {% endif %}
+            {% if session.get('email') == 'moderador@4bets.com' %}
+                <a href="{{ url_for('home.pagina_moderador') }}" class="nav-link">Controle de eventos</a>
+                <a href="{{ url_for('home.finalizar_eventos') }}" class="nav-link">Finalizar eventos</a>
+            {% endif %}
+        </nav>
+    </header>
     
+    <div class="main-content">
+        <h1 class="page-title">{% block nome %}{% endblock %}</h1>
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="alert alert-{{ categoria }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block conteudo %}{% endblock %}
+    </div>
 </body>
 </html>

@@ -4,32 +4,49 @@
 {% block nome %}Sacar saldo{% endblock %}
 
 {% block conteudo %}
-<form method="POST">
-    <input type="radio" id="conta_bancaria" name="resposta" value="conta_bancaria" required onclick="mostrarCampo('conta')">
-    <label for="conta_bancaria">Conta bancária</label>
-    
-    <input type="radio" id="pix" name="resposta" value="pix" onclick="mostrarCampo('pix')">
-    <label for="pix">PIX</label>
+<div class="form-container">
+    <h3>Escolha a forma de saque</h3>
+    <form method="POST">
+        <div class="form-group">
+            <div class="radio-options">
+                <div class="radio-option">
+                    <input type="radio" id="conta_bancaria" name="resposta" value="conta_bancaria" required onclick="mostrarCampo('conta')">
+                    <label for="conta_bancaria">Conta bancária</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="pix" name="resposta" value="pix" onclick="mostrarCampo('pix')">
+                    <label for="pix">PIX</label>
+                </div>
+            </div>
+        </div>
 
-    <div id="campo_conta" style="display: none;">
-        <label for="banco">Banco:</label>
-        <input type="text" id="banco" name="banco">
+        <div id="campo_conta" class="form-group" style="display: none;">
+            <div class="form-group">
+                <label for="banco">Banco:</label>
+                <input type="text" id="banco" name="banco">
+            </div>
+            
+            <div class="form-group">
+                <label for="conta">Número da conta corrente:</label>
+                <input type="text" id="conta" name="conta">
+            </div>
+        </div>
+
+        <div id="campo_pix" class="form-group" style="display: none;">
+            <div class="form-group">
+                <label for="chave_pix">Chave PIX:</label>
+                <input type="text" id="chave_pix" name="chave_pix">
+            </div>
+        </div>
         
-        <label for="conta">Número da conta corrente:</label>
-        <input type="text" id="conta" name="conta">
-    </div>
+        <div class="form-group">
+            <label for="valor">Valor a sacar:</label>
+            <input type="number" id="valor" name="valor" min="0" step="0.01" required>
+        </div>
 
-    <div id="campo_pix" style="display: none;">
-        <label for="chave_pix">Chave PIX:</label>
-        <input type="text" id="chave_pix" name="chave_pix">
-    </div>
-    
-    <br><br>
-    
-    <label for="valor">Valor a sacar:</label>
-    <input type="number" id="valor" name="valor" min="0" step="0.01" required>
-    <button type="submit">Sacar</button>
-</form>
+        <button type="submit" class="form-submit">Sacar</button>
+    </form>
+</div>
 
 <script>
 function mostrarCampo(tipo) {

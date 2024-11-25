@@ -4,38 +4,39 @@
 {% block nome %}Adicionar créditos{% endblock %}
 
 {% block conteudo %}
+<div class="form-container">
+    <form method="POST">
+        <div class="form-group">
+            <label for="valor">Valor do depósito:</label>
+            <input type="number" id="valor" name="valor" step="0.01" min="0" required>
+        </div>
 
-<form method="POST">
-    <div>
-        <label for="valor">Valor do depósito:</label>
-        <input type="number" id="valor" name="valor" step="0.01" min="0" required>
-    </div>
+        <div class="form-group">
+            <label for="numero_cartao">Número do cartão:</label>
+            <input type="text" id="numero_cartao" name="numero_cartao" maxlength="16" required>
+        </div>
 
-    <div>
-        <label for="numero_cartao">Número do cartão:</label>
-        <input type="text" id="numero_cartao" name="numero_cartao" maxlength="16" required>
-    </div>
+        <div class="form-group">
+            <label for="nome">Nome no cartão:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
 
-    <div>
-        <label for="nome">Nome no cartão:</label>
-        <input type="text" id="nome" name="nome" required>
-    </div>
+        <div class="form-group">
+            <label for="mes">Mês de validade:</label>
+            <input type="number" id="mes" name="mes" min="1" max="12" required>
+        </div>
 
-    <div>
-        <label for="mes">Mês de validade:</label>
-        <input type="number" id="mes" name="mes" min="1" max="12" required>
-    </div>
+        <div class="form-group">
+            <label for="ano">Ano de validade:</label>
+            <input type="number" id="ano" name="ano" min="2024" max="2034" required>
+        </div>
 
-    <div>
-        <label for="ano">Ano de validade:</label>
-        <input type="number" id="ano" name="ano" min="2024" max="2034" required>
-    </div>
+        <div class="form-group">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" required>
+        </div>
 
-    <div>
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" maxlength="3" required>
-    </div>
-
-    <button type="submit">Adicionar créditos</button>
-</form>
+        <button type="submit" class="form-submit">Adicionar créditos</button>
+    </form>
+</div>
 {% endblock %}

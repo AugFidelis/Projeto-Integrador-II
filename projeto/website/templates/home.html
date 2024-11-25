@@ -7,14 +7,12 @@
 <div>
     <div class="header">
         <h2>Bem-vindo, {{ nome }}!</h2>
-        <div class="header-actions">
-            <a href="{{ url_for('eventos.criar_evento') }}" class="btn-criar">Criar evento</a>
-            <a href="{{ url_for('auth.logout') }}" class="btn-sair">Sair</a>
-        </div>
+        <a href="{{ url_for('auth.logout') }}" class="btn-action btn-sair">Sair</a>
     </div>
-
-    <div>
-        <a href="{{ url_for('eventos.pesquisar_eventos') }}">Pesquisar eventos</a>
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('eventos.criar_evento') }}" class="btn-action">Criar evento</a>
+        <a href="{{ url_for('eventos.pesquisar_eventos') }}" class="btn-action">Pesquisar eventos</a>
     </div>
     
     <div class="eventos-container">

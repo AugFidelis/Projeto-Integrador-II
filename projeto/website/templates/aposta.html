@@ -4,30 +4,32 @@
 {% block nome %}Apostar em evento{% endblock %}
 
 {% block conteudo %}
-<form method="POST">
+<div class="form-container">
     <h3>{{ evento[0] }}</h3>
     <p>{{ evento[1] }}</p>
     <p>Valor da cota: {{ "%.2f"|format(evento[2]) }}x</p>
     
-    <div>
-        <input type="radio" name="resultado" value="Acontecerá" id="acontecera" required>
-        <label for="acontecera">
-           Sim (Acontecerá)
-        </label>
-    </div>
-    
-    <div>
-        <input type="radio" name="resultado" value="Não acontecerá" id="nao_acontecera" required>
-        <label for="nao_acontecera">
-            Não (Não acontecerá)
-        </label>
-    </div>
-    
-    <div>
-        <label for="valor">Valor da aposta:</label>
-        <input type="number" id="valor" name="valor_aposta" step="0.01" min="{{ evento[2] }}" required>
-    </div>
-    
-    <button type="submit">Confirmar Aposta</button>
-</form>
+    <form method="POST">
+        <div class="form-group">
+            <label>Resultado esperado:</label>
+            <div class="radio-options">
+                <div class="radio-option">
+                    <input type="radio" name="resultado" value="Acontecerá" id="acontecera" required>
+                    <label for="acontecera">Sim (Acontecerá)</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="resultado" value="Não acontecerá" id="nao_acontecera" required>
+                    <label for="nao_acontecera">Não (Não acontecerá)</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="valor">Valor da aposta:</label>
+            <input type="number" id="valor" name="valor_aposta" step="0.01" min="{{ evento[2] }}" required>
+        </div>
+        
+        <button type="submit" class="form-submit">Confirmar Aposta</button>
+    </form>
+</div>
 {% endblock %}
