@@ -71,7 +71,6 @@ def cadastro():
             session['data_nascimento'] = data_nascimento
             session['saldo'] = 0.0  # Saldo inicial
             
-            # flash('Usuário registrado com sucesso!', category='sucesso')
             return redirect(url_for('auth.credito_inicial'))
 
     return render_template('cadastro.html')

@@ -4,10 +4,13 @@
 {% block nome %}Home{% endblock %}
 
 {% block conteudo %}
-<div>
-    <h1>Bem-vindo ao site de apostas!</h1>
-    <h3>Faça login ou cadastre-se para acessar o site:</h3>
-    <a href="{{ url_for('auth.login') }}">Login</a>
-    <a href="{{ url_for('auth.cadastro') }}">Cadastro</a>
+<div class="form-container">
+    <h1 style="text-align: center; margin-bottom: 30px;">Bem-vindo ao site de apostas!</h1>
+    <h3 style="text-align: center; margin-bottom: 30px;">Faça login ou cadastre-se para acessar o site:</h3>
+    
+    <div class="action-buttons" style="justify-content: center;">
+        <a href="{{ url_for('auth.login') }}" class="btn-action">Login</a>
+        <a href="{{ url_for('auth.cadastro') }}" class="btn-action">Cadastro</a>
+    </div>
 </div>
 {% endblock %}

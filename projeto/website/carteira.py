@@ -54,7 +54,6 @@ def paginacarteira():
 @carteira.route('/compra', methods=['GET', 'POST'])
 def compra():
     if request.method == 'POST':
-        # Convert session saldo to float before adding
         valor = float(request.form.get('valor'))
         novo_saldo = float(session.get('saldo', 0)) + valor
         

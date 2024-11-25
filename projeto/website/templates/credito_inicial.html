@@ -4,19 +4,25 @@
 {% block nome %}Crédito inicial{% endblock %}
 
 {% block conteudo %}
-<div>
-    <form method="POST" action="{{ url_for('auth.credito_inicial') }}">
-        <label>Deseja fazer um depósito inicial?</label>
-        
-        <div>
-            <input type="radio" id="nao" name="deposito_inicial" value="nao">
-            <label for="nao">Não</label>
+<div class="form-container">
+    <form method="POST" action="{{ url_for('auth.credito_inicial') }}" class="auth-form">
+        <div class="form-group">
+            <label>Deseja fazer um depósito inicial?</label>
+            
+            <div class="radio-options">
+                <div class="radio-option">
+                    <input type="radio" id="nao" name="deposito_inicial" value="nao">
+                    <label for="nao">Não</label>
+                </div>
 
-            <input type="radio" id="sim" name="deposito_inicial" value="sim">
-            <label for="sim">Sim</label>
+                <div class="radio-option">
+                    <input type="radio" id="sim" name="deposito_inicial" value="sim">
+                    <label for="sim">Sim</label>
+                </div>
+            </div>
         </div>
 
-        <button type="submit">Confirmar</button>
+        <button type="submit" class="form-submit">Confirmar</button>
     </form>
 </div>
 {% endblock %}

@@ -136,10 +136,10 @@ def finalizar_eventos():
         # Distribuir os ganhos para os vencedores
         for aposta in apostas:
             if aposta[2] == resultado:  # Se acertou o resultado
-                valor_apostado = float(aposta[1])  # Converter para float
+                valor_apostado = float(aposta[1])
                 
-                # Ganho da cota
-                ganho_cota = valor_apostado * (valor_cota - 1)  # Subtrair 1 da cota pois o valor apostado já será devolvido
+                # Ganho da cota (valor apostado * cota)
+                ganho_cota = valor_apostado * valor_cota
                 
                 # Ganho proporcional dos perdedores
                 if total_apostado_vencedores > 0:
@@ -148,8 +148,8 @@ def finalizar_eventos():
                 else:
                     ganho_perdedores = 0
                 
-                # Ganho total (incluindo a devolução do valor apostado)
-                ganho_total = ganho_cota + ganho_perdedores + valor_apostado
+                # Ganho total (ganho da cota + ganho dos perdedores)
+                ganho_total = ganho_cota + ganho_perdedores
                 
                 print(f"Debug - Usuário {aposta[0]}: Valor apostado: {valor_apostado}, Ganho cota: {ganho_cota}, Ganho perdedores: {ganho_perdedores}, Total: {ganho_total}")  # Debug
                 

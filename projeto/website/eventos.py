@@ -80,7 +80,6 @@ def apostar(evento_id):
             flash('Saldo insuficiente para realizar a aposta!', category='erro')
             return redirect(url_for('eventos.apostar', evento_id=evento_id))
         
-        # Não é mais necessário converter saldo_atual para float aqui, pois já foi convertido
         novo_saldo = saldo_atual - valor_aposta
         
         # Atualizar o saldo do usuário

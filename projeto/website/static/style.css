@@ -327,7 +327,7 @@ body {
     }
 }
 
-/* Header and Navigation Styles */
+
 .site-header {
     background-color: #333333;
     padding: 1rem 2rem;
@@ -498,7 +498,7 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Form Styles */
+
 .form-container {
     max-width: 600px;
     background-color: #6c2e84;
@@ -575,6 +575,75 @@ body {
 
 .form-submit:hover {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.auth-container {
+    max-width: 400px;
+    background-color: #6c2e84;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: white;
+    margin: 40px auto;
+}
+
+.auth-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.auth-form .form-submit {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.auth-form .form-submit:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
 }
 
 
